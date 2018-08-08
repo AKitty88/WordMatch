@@ -37,22 +37,36 @@ def find(word, words, seen, target, path):
 fname = input("Enter dictionary name: ")
 file = open(fname)
 lines = file.readlines()
-start = input("Enter start word:")
-words = []
+currentPath: []
+shortestPath: []
 
-for line in lines:
-  word = line.rstrip()
-  if len(word) == len(start):
-    words.append(word)
+while True:
+  start = input("Enter start word:")
+  words = []
 
-target = input("Enter target word:")
+  for line in lines:
+    word = line.rstrip()
+    if len(word) == len(start):
+      words.append(word)
+
+  target = input("Enter target word:")
+  break
+
 count = 0
-path = [start]
+currentPath = [start]
+shortestPath = currentPath
 seen = {start : True}
 
-if find(start, words, seen, target, path):
-  path.append(target)
-  print(len(path) - 1, path)
-else:
-  print("No path found")
+#while (count != 3):
+if find(start, words, seen, target, currentPath):
+  if (len(currentPath) == 0):
+    print("No path found")
+  elif (len(currentPath) >= len(shortestPath)):
+    currentPath.append(target)
+    print(len(currentPath) - 1, currentPath)
+  else:
+    shortestPath.append(target)
+    print(len(shortestPath) - 1, shortestPath)
 
+if (len(currentPath) == 0):
+  print("No path found")
