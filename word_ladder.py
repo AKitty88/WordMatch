@@ -16,7 +16,7 @@ def find(word, words, seen, target, path):
     list += build(word[:i] + "." + word[i + 1:], words, seen, list)
 
   if len(list) == 0:
-    return False
+    return path
 
   list = sorted([(same(w, target), w) for w in list], reverse = True)
 
@@ -24,49 +24,35 @@ def find(word, words, seen, target, path):
     if match >= len(target) - 1:
       if match == len(target) - 1:
         path.append(item)
-      return True
+      return path
     seen[item] = True
 
   for (match, item) in list:
     path.append(item)
     if find(item, words, seen, target, path):
-      return True
+      return path
     path.pop()
 
 
 fname = input("Enter dictionary name: ")
 file = open(fname)
 lines = file.readlines()
-currentPath: []
-shortestPath: []
+start = input("Enter start word:")
+words = []
 
-while True:
-  start = input("Enter start word:")
-  words = []
+for line in lines:
+  word = line.rstrip()
+  if len(word) == len(start):
+    words.append(word)
 
-  for line in lines:
-    word = line.rstrip()
-    if len(word) == len(start):
-      words.append(word)
-
-  target = input("Enter target word:")
-  break
-
+target = input("Enter target word:")
 count = 0
-currentPath = [start]
-shortestPath = currentPath
+path = [start]
 seen = {start : True}
 
-#while (count != 3):
-if find(start, words, seen, target, currentPath):
-  if (len(currentPath) == 0):
-    print("No path found")
-  elif (len(currentPath) >= len(shortestPath)):
-    currentPath.append(target)
-    print(len(currentPath) - 1, currentPath)
-  else:
-    shortestPath.append(target)
-    print(len(shortestPath) - 1, shortestPath)
-
-if (len(currentPath) == 0):
+if find(start, words, seen, target, path):
+  path.append(target)
+  print(len(path) - 1, path)
+else:
   print("No path found")
+
