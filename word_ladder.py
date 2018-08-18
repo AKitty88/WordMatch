@@ -1,58 +1,41 @@
-import re
+
+def find(start, target, words):
+    alpha = [chr(x) for x in range(97, 123)]
+    seen = {start: None}
+    queue = [start]
+
+    while queue:
+        curr = queue.pop(0)
+
+        if curr == target:
+            path = []
+
+            while curr:
+                path.insert(0, curr)
+                curr = seen[curr]
+
+            return path
+
+        letters = list(curr)
+
+        for i, c in enumerate(letters):
+            for letter in alpha:
+                new_word = "".join(letters[:i]) + letter + "".join(letters[i+1:])
+
+                if new_word in words and new_word not in seen:
+                    seen[new_word] = curr
+                    queue.append(new_word)
 
 
-def same(item, target):
-  return len([c for (c, t) in zip(item, target) if c == t])
-
-
-def build(pattern, words, seen, list):
-  return [word for word in words if re.search(pattern, word) and word not in seen.keys() and word not in list]
-
-
-def find(word, words, seen, target, path):
-  list = []
-
-  for i in range(len(word)):
-    list += build(word[:i] + "." + word[i + 1:], words, seen, list)
-
-  if len(list) == 0:
-    return path
-
-  list = sorted([(same(w, target), w) for w in list], reverse = True)
-
-  for (match, item) in list:
-    if match >= len(target) - 1:
-      if match == len(target) - 1:
-        path.append(item)
-      return path
-    seen[item] = True
-
-  for (match, item) in list:
-    path.append(item)
-    if find(item, words, seen, target, path):
-      return path
-    path.pop()
-
-
-fname = input("Enter dictionary name: ")
-file = open(fname)
+file = open("dictionary.txt")
 lines = file.readlines()
-start = input("Enter start word:")
 words = []
+start = input("Enter start word:")
 
 for line in lines:
-  word = line.rstrip()
-  if len(word) == len(start):
-    words.append(word)
+    word = line.rstrip()
+    if len(word) == len("lead"):
+        words.append(word)
 
 target = input("Enter target word:")
-count = 0
-path = [start]
-seen = {start : True}
-
-if find(start, words, seen, target, path):
-  path.append(target)
-  print(len(path) - 1, path)
-else:
-  print("No path found")
-
+print(find(start, target, words))
