@@ -1,7 +1,6 @@
 
 def find(start, target, words):
     alpha = [chr(x) for x in range(97, 123)]
-    seen = {start: None}
     queue = [start]
 
     while queue:
@@ -34,8 +33,12 @@ start = input("Enter start word:")
 
 for line in lines:
     word = line.rstrip()
-    if len(word) == len("lead"):
+    if len(word) == len(start):
         words.append(word)
 
 target = input("Enter target word:")
+
+seen = {start: None}
+seen[input("Words not allowed: ")] = None
+
 print(find(start, target, words))
