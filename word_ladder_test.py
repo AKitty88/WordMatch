@@ -7,15 +7,22 @@ class TestWordLadder(unittest.TestCase):
         # Test the shortest path creator function with normal start and target word
         self.assertEqual(len(main_for_test("lead", "gold", "", "Y")), 4)
         self.assertEqual(len(main_for_test("loss", "gold", "cold", "Y")), 5)
+        self.assertEqual(len(main_for_test("loss", "gold", "loss", "Y")), 5)
 
     def test_short_bad_start(self):
         # Test the shortest path creator function with bad start and normal target word
         self.assertEqual(len(main_for_test("lsss", "gold", "", "y")), 0)
+        self.assertEqual(len(main_for_test("lsss", "gold", "cold", "y")), 0)
+        self.assertEqual(len(main_for_test("lsss", "gold", "loss", "y")), 0)
 
     def test_short_bad_target(self):
         # Test the shortest path creator function with normal start and bad target word
         self.assertEqual(len(main_for_test("lead", "gggd", "", "Y")), 0)
+        self.assertEqual(len(main_for_test("lead", "gggd", "cold", "Y")), 0)
+        self.assertEqual(len(main_for_test("lead", "gggd", "loss", "Y")), 0)
 
     def test_short_different_length(self):
         # Test the shortest path creator function with normal start and target word that are not the same length
         self.assertEqual(len(main_for_test("lead", "gin", "", "y")), 0)
+        self.assertEqual(len(main_for_test("lead", "gin", "tin", "y")), 0)
+        self.assertEqual(len(main_for_test("lead", "gin", "lean", "y")), 0)
