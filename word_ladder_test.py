@@ -3,11 +3,17 @@ from word_ladder_forTest import main_for_test
 
 class TestWordLadder(unittest.TestCase):
 
-    def test_short_good(self):
-        # Test the shortest path creator function with normal start and target word
+    def test_short_good_fourletters(self):
+        # Test the shortest path creator function with four-letter-long normal start and target word
         self.assertEqual(len(main_for_test("lead", "gold", "", "Y")), 4)
         self.assertEqual(len(main_for_test("loss", "gold", "cold", "Y")), 5)
         self.assertEqual(len(main_for_test("loss", "gold", "loss", "Y")), 5)
+
+    def test_short_good_threeletters(self):
+        # Test the shortest path creator function with three-letter-long normal start and target word
+        self.assertEqual(len(main_for_test("led", "god", "", "Y")), 3)
+        self.assertEqual(len(main_for_test("led", "god", "ged", "Y")), 4)
+        self.assertEqual(len(main_for_test("led", "god", "gin", "Y")), 3)
 
     def test_short_bad_start(self):
         # Test the shortest path creator function with bad start and normal target word
@@ -26,3 +32,29 @@ class TestWordLadder(unittest.TestCase):
         self.assertEqual(len(main_for_test("lead", "gin", "", "y")), 0)
         self.assertEqual(len(main_for_test("lead", "gin", "tin", "y")), 0)
         self.assertEqual(len(main_for_test("lead", "gin", "lean", "y")), 0)
+
+#-----------------------------------------------------------------------------------------------------------------------
+
+    def test_any_path_good(self):
+        # Test the any path creator function with normal start and target word
+        self.assertEqual(len(main_for_test("lead", "gold", "", "N")), 4)
+        self.assertEqual(len(main_for_test("loss", "toys", "cold", "N")), 3)
+        self.assertEqual(len(main_for_test("loss", "gold", "loss", "N")), 7)
+
+    def test_any_path_bad_start(self):
+        # Test the any path creator function with bad start and normal target word
+        self.assertEqual(len(main_for_test("lsss", "gold", "", "z")), 0)
+        self.assertEqual(len(main_for_test("lsss", "gold", "cold", "z")), 0)
+        self.assertEqual(len(main_for_test("lsss", "gold", "loss", "z")), 0)
+
+    def test_any_path_bad_target(self):
+        # Test the any path creator function with normal start and bad target word
+        self.assertEqual(len(main_for_test("lead", "gggd", "", "")), 0)
+        self.assertEqual(len(main_for_test("lead", "gggd", "cold", "")), 0)
+        self.assertEqual(len(main_for_test("lead", "gggd", "loss", "")), 0)
+
+    def test_any_path_different_length(self):
+        # Test the any path creator function with normal start and target word that are not the same length
+        self.assertEqual(len(main_for_test("lead", "gin", "", " ")), 0)
+        self.assertEqual(len(main_for_test("lead", "gin", "tin", " ")), 0)
+        self.assertEqual(len(main_for_test("lead", "gin", "lean", " ")), 0)
