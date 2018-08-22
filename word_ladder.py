@@ -61,6 +61,7 @@ file = open("dictionary.txt")
 lines = file.readlines()
 words = []
 start = ""
+target = ""
 
 while start not in words:
     start = input("Enter start word:")
@@ -72,10 +73,14 @@ while start not in words:
 
     if start not in words:
         print(start, "is NOT a proper word!")
-
         path = []
 
-target = input("Enter target word:")
+while target not in words:
+    target = input("Enter target word:")
+
+    if target not in words:
+        print(target, "is NOT a proper word!")
+        path = []
 
 seen = {start: None}
 seen[input("Words not allowed: ")] = None

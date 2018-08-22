@@ -71,6 +71,11 @@ def main_for_test(start, target, not_allowed, shortest):
         file.close()
         return path
 
+    if target not in words:
+        path = []
+        file.close()
+        return path
+
     seen = {start: None}
     seen[not_allowed] = None
 
@@ -85,6 +90,6 @@ def main_for_test(start, target, not_allowed, shortest):
             path_for_any.append(target)
             return path_for_any
         else:
-            path = "No path found"
+            path = []
             file.close()
             return path
