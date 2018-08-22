@@ -78,13 +78,13 @@ class TestWordLadder(unittest.TestCase):
         self.assertEqual(len(main_for_test("lead", "gin", "lean", " ")), 0)
 
     def test_any_numbers(self):
-        # Test the shortest path creator function with numbers
-        self.assertEqual(len(main_for_test("45", "55", "", "d")), 0)
+        # Test the any path creator function with numbers
+        self.assertEqual(len(main_for_test("45", "55", "", "8")), 0)
         self.assertEqual(len(main_for_test("45", "55", "55", "f")), 0)
         self.assertEqual(len(main_for_test("45", "55", "45", "g")), 0)
 
     def test_any_float_numbers(self):
-        # Test the shortest path creator function with float numbers
+        # Test the any path creator function with float numbers
         self.assertEqual(len(main_for_test("45.05", "55.03", "", "n")), 0)
-        self.assertEqual(len(main_for_test("45.0566", "55.0566", "55", " ")), 0)
-        self.assertEqual(len(main_for_test("45.000", "55.999", "45", "")), 0)
+        self.assertEqual(len(main_for_test("45.0566", "55.0566", "55", "66")), 0)
+        self.assertEqual(len(main_for_test("45.000", "55.999", "45", "890.00")), 0)
