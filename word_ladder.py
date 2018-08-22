@@ -30,7 +30,7 @@ def find_any(word, words, seen, target, path):
       return True
     path.pop()
 
-def find_shortest(start, target, words):
+def find_shortest(start, target, words, seen):
     alpha = [chr(x) for x in range(97, 123)]
     queue = [start]
 
@@ -55,7 +55,6 @@ def find_shortest(start, target, words):
                 if new_word in words and new_word not in seen:
                     seen[new_word] = curr
                     queue.append(new_word)
-
 
 file = open("dictionary.txt")
 lines = file.readlines()
@@ -91,7 +90,7 @@ answer_yes = "y"
 path_for_any = [start]
 
 if (input("Would you like the shortest possible path? y / any other key:   ")).lower() == answer_yes:
-    path = find_shortest(start, target, words)
+    path = find_shortest(start, target, words, seen)
     print(len(path) - 1, path)
 else:
     if find_any(start, words, seen, target, path_for_any):

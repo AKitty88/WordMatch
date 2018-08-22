@@ -90,6 +90,7 @@ def main_for_test(start, target, not_allowed, shortest):
     else:
         if find_any(start, words, seen, target, path_for_any):
             path_for_any.append(target)
+            file.close()
             return path_for_any
         else:
             path = []
