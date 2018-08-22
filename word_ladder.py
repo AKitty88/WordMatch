@@ -73,6 +73,8 @@ while start not in words:
     if start not in words:
         print(start, "is NOT a proper word!")
 
+        path = []
+
 target = input("Enter target word:")
 
 seen = {start: None}
@@ -87,6 +89,8 @@ if (input("Would you like the shortest possible path? y / any other key:   ")).l
 else:
     if find_any(start, words, seen, target, path_for_any):
         path_for_any.append(target)
+        file.close()
         print(len(path_for_any) - 1, path_for_any)
     else:
+        file.close()
         print("No path found")
