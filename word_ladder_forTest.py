@@ -67,7 +67,7 @@ def main_for_test(start, target, not_allowed, shortest):
             words.append(word)
 
     seen = {start: None}
-    seen.append(not_allowed)
+    seen[not_allowed] = None
 
     answer_yes = "y"
     path_for_any = [start]

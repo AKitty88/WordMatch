@@ -60,12 +60,18 @@ def find_shortest(start, target, words):
 file = open("dictionary.txt")
 lines = file.readlines()
 words = []
-start = input("Enter start word:")
+start = ""
 
-for line in lines:
-    word = line.rstrip()
-    if len(word) == len(start):
-        words.append(word)
+while start not in words:
+    start = input("Enter start word:")
+
+    for line in lines:
+        word = line.rstrip()
+        if len(word) == len(start):
+            words.append(word)
+
+    if start not in words:
+        print(start, "is NOT a proper word!")
 
 target = input("Enter target word:")
 
