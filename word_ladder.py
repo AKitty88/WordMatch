@@ -75,12 +75,14 @@ while start not in words:
         print(start, "is NOT a proper word!")
         path = []
 
-while target not in words:
-    target = input("Enter target word:")
+while target not in words or len(target) != len(start):
+    target = input("Enter target word (as long as the start word):")
 
-    if target not in words:
+    if len(target) == len(start) and target not in words:
         print(target, "is NOT a proper word!")
         path = []
+
+assert len(start) == len(target)
 
 seen = {start: None}
 seen[input("Words not allowed: ")] = None

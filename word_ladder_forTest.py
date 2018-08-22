@@ -71,10 +71,12 @@ def main_for_test(start, target, not_allowed, shortest):
         file.close()
         return path
 
-    if target not in words:
-        path = []
-        file.close()
-        return path
+    if target not in words or len(target) != len(start):
+            path = []
+            file.close()
+            return path
+
+    assert len(start) == len(target)
 
     seen = {start: None}
     seen[not_allowed] = None
